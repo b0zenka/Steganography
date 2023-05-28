@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Steganography</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 3rem;
+        }
+        .endpoint {
+            margin-top: 1.5rem;
+        }
+        .result {
+            font-size: 1.2rem;
+            margin: 1rem 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Steganography</h1>
+
+        <div class="endpoint">
+            <h2>Hide text</h2>
+            <form method="POST" action="/hide" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="image">Select image:</label>
+                    <input type="file" class="form-control-file" id="image" name="image" accept=".png, .jpg, .jpeg">
+                </div>
+                <div class="form-group">
+                    <label for="text">Enter text:</label>
+                    <textarea class="form-control" id="text" name="text" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Hide text</button>
+            </form>
+            {% if output_path %}
+            <p class="result">Hidden text result: {{ output_path }} </p>
+            {% endif %}
+        </div>
+
+        <div class="endpoint">
+            <h2>Read text</h2>
+            <form method="POST" action="/read" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="image">Select image:</label>
+                    <input type="file" class="form-control-file" id="image" name="image" accept=".png, .jpg, .jpeg">
+                </div>
+                <button type="submit" class="btn btn-primary">Read text</button>
+            </form>
+            {% if extracted_text %}
+            <p class="result">Extracted text result: {{ extracted_text }}</p>
+            {% endif %}
+        <div>
+    </div>
+</body>
+</html>
